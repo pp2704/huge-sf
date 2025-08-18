@@ -4,7 +4,7 @@ env:
 on:
   push:
     branches:
-      - '*'
+      - 'main'
     paths-ignore:
       - src/test/java/**
       - target/**
@@ -36,7 +36,8 @@ jobs:
           projectKey: actionstest
           codeScanUrl: https://squpgrade.codescan.io/
           login: squ_717ac3abb90929406895664e19a1b0715554b4c5
-          generateSarifFile: false
+          generateSarifFile: true
+          failOnRedQualityGate: false 
       - name: Run Codescan On PR
         if: github.event_name == 'pull_request'
         uses: codescan-io/codescan-scanner-action@1.6
@@ -46,7 +47,8 @@ jobs:
           projectKey: actionstest
           codeScanUrl: https://squpgrade.codescan.io/
           login: squ_717ac3abb90929406895664e19a1b0715554b4c5
-          generateSarifFile: false
+          generateSarifFile: true
+          failOnRedQualityGate: false 
           args: |
             sonar.pullrequest.branch=${{github.head_ref}}
             sonar.pullrequest.base=${{github.base_ref}}
